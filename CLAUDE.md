@@ -5,12 +5,14 @@
 Marketing site for Samson (TikTok `@sammympole516`), a Nairobi maker of **custom fitted joinery**: kitchens, built-in wardrobes, TV/feature walls, vanities, office storage. Not a decorator — copy and SEO target "kitchen cabinets / wardrobes / TV wall unit Nairobi", not generic "interior design".
 
 Full plan, service→photo mapping, project groupings and photo index: `PLAN.md`.
-Vault note: `~/Documents/Second Brain/Projects/Smart Interior Design.md`
+Vault note: `~/Documents/Second Brain/Projects/Smart Interior Design.md` · open questions: `Projects/Smart Interior Design — Client Questions.md` (has a table of where each answer goes in the code).
+
+**Status (2026-09-18):** v1 built and approved; client preview live on GitHub Pages; waiting on Samson (domain/hosting payment, originals, content). SEO on hold until Alex says go.
 
 ## Stack
 Next.js 16 · React 19 · TypeScript · Tailwind v4 (tokens via `@theme` in `globals.css`, no `tailwind.config.js`) · App Router, no `src/` · Resend for the quote form. Mirrors `~/Documents/ideas/martin-munga/` — check its `LESSONS.md` before fighting a Next 16 / Tailwind v4 issue.
 
-Hosting: **undecided** (Vercel vs Hostinger). Don't add host-specific config until decided.
+Hosting: **undecided**. It must run Node for `/api/quote`. **Not Vercel Hobby** (non-commercial terms). Hostinger Business or a VPS are the candidates. Don't add host-specific config until decided.
 
 **Client preview — GitHub Pages** (repo `AlexIrungu/smart-interior-designs`, public): `https://alexirungu.github.io/smart-interior-designs/`. Built by `.github/workflows/deploy-pages.yml` on push to `main`, only so Samson can see the build and pay for hosting and a domain. `GITHUB_PAGES=true` switches `next.config.ts` to `output: "export"` + `basePath: "/smart-interior-designs"` + `trailingSlash` + unoptimized images, and sets `noindex`. Without it, the app is a normal Next server.
 - The workflow deletes `app/api` before building (static export can't include a POST route). On the preview the quote form stays visible, but submitting shows a "preview" notice (`isStaticPreview`) — never fake a success.

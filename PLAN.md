@@ -2,7 +2,7 @@
 
 Client: Samson (TikTok `@sammympole516`)
 Source material: `~/Downloads/Smart Interior Design/` (50 JPEG + 5 MOV, received 2026-08-19)
-Status: Scaffolded (Next 16.3.5) 2026-09-18 — building on current photos.
+Status (2026-09-18): v1 built and approved · client preview live at https://alexirungu.github.io/smart-interior-designs/ · waiting on Samson for domain/hosting payment and the questions below (tracked in vault → *Smart Interior Design — Client Questions*).
 
 ---
 
@@ -70,7 +70,7 @@ A fast, mobile-first site that turns a homeowner or developer in Nairobi into a 
 3. **Projects:** grid of grouped projects → project page (photos + short blurb: location, scope, finish)
 4. **Process:** Site visit & measure → Design & quote → Workshop fabrication → Install & handover. This is the real workflow, and the photos show every stage.
 5. **About:** Samson, the team and handover photos
-6. **Contact / Get a quote:** WhatsApp button + form (name, phone, location, room type, rough size, budget band, optional photo upload)
+6. **Contact / Get a quote:** WhatsApp button + form (name, phone, location, room type, rough size, budget band). *Built without photo upload; the form's success state sends people to WhatsApp for photos.*
 
 A sticky WhatsApp button runs sitewide. In this market, WhatsApp is the primary channel and the form is the fallback.
 
@@ -79,7 +79,8 @@ A sticky WhatsApp button runs sitewide. In this market, WhatsApp is the primary 
 - `next/image` for AVIF/WebP and responsive sizes, which these compressed JPEGs need
 - Resend for the quote form
 - Project content lives in a typed `lib/projects.ts`; no CMS for v1
-- Hosting: **open decision.** Vercel is the simplest option. Hostinger (Node/Passenger) is possible if Samson wants it with our other sites.
+- Hosting: **open decision.** It must run Node (the quote form's API route). Vercel Hobby is ruled out because it's non-commercial (see daily note 2026-09-18). Candidates: Hostinger Business (Node/Passenger), or a VPS.
+- Client preview meanwhile: GitHub Pages static export (`GITHUB_PAGES=true`).
 
 ---
 
@@ -100,10 +101,10 @@ A sticky WhatsApp button runs sitewide. In this market, WhatsApp is the primary 
 ---
 
 ## 4. Phases
-- **Phase 0 — Content (now):** send the question list above → collect originals → confirm name/domain/hosting.
-- **Phase 1 — Design direction:** a light, material-led look (warm neutrals, oak/walnut textures, one accent). It must stay credible even with phone photography.
-- **Phase 2 — Build:** scaffold → pages → WhatsApp/quote flow → projects from `lib/projects.ts`.
-- **Phase 3 — Launch & local SEO:** metadata, `LocalBusiness` schema, sitemap, Google Business Profile, TikTok bio link.
+- **Phase 0 — Content:** 🔄 name ✅ · phone/WhatsApp ✅ · question list drafted, to send with the preview link · originals, domain, hosting ⏳
+- **Phase 1 — Design direction:** ✅ "Warm workshop" chosen 2026-09-18 (warm neutrals, oak accent, Young Serif + Hanken Grotesk).
+- **Phase 2 — Build:** ✅ home · projects · services · quote form · GitHub Pages preview. ⏳ test the form end to end, swap in originals, fill TODO(samson) content.
+- **Phase 3 — Launch & local SEO:** ⏸️ on hold (Alex). Hosting + domain → deploy → metadata, `LocalBusiness` schema, sitemap, Google Business Profile, TikTok bio link.
 
 We can start Phase 1–2 on the current photos. We'd swap in originals as they arrive, but I wouldn't launch on the WhatsApp copies alone.
 
