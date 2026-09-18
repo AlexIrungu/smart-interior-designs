@@ -4,7 +4,7 @@ import samson from "@/assets/about/41-samson.jpg";
 import { ArrowIcon } from "@/components/icons";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { photos, photosFor, projects, services } from "@/lib/projects";
-import { site } from "@/lib/site";
+import { basePath, site } from "@/lib/site";
 
 const hero = photos.find((p) => p.project === "oak-island-kitchen" && p.finished)!;
 
@@ -114,8 +114,8 @@ export default function Home() {
           </div>
           <video
             className="aspect-[9/16] max-h-[36rem] w-full rounded-sm object-cover md:justify-self-end"
-            src="/video/installing-loop.mp4"
-            poster="/video/installing-poster.jpg"
+            src={`${basePath}/video/installing-loop.mp4`}
+            poster={`${basePath}/video/installing-poster.jpg`}
             autoPlay
             muted
             loop

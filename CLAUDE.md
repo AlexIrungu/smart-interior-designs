@@ -12,6 +12,11 @@ Next.js 16 · React 19 · TypeScript · Tailwind v4 (tokens via `@theme` in `glo
 
 Hosting: **undecided** (Vercel vs Hostinger). Don't add host-specific config until decided.
 
+**Client preview — GitHub Pages** (repo `AlexIrungu/smart-interior-designs`, public): `https://alexirungu.github.io/smart-interior-designs/`. Built by `.github/workflows/deploy-pages.yml` on push to `main`, only so Samson can see the build and pay for hosting and a domain. `GITHUB_PAGES=true` switches `next.config.ts` to `output: "export"` + `basePath: "/smart-interior-designs"` + `trailingSlash` + unoptimized images, and sets `noindex`. Without it, the app is a normal Next server.
+- The workflow deletes `app/api` before building (static export can't include a POST route). On the preview the quote form stays visible, but submitting shows a "preview" notice (`isStaticPreview`) — never fake a success.
+- Raw asset paths (`<video src>`, `poster`) need `${basePath}` from `lib/site.ts`; `<Link>` and imported images get it automatically.
+- Anything that stops a static export breaks the preview: server-side `searchParams`, `cookies()`/`headers()`, dynamic routes without `generateStaticParams` + `dynamicParams = false`. `/quote` reads `?service=` client-side (`useSearchParams` inside `<Suspense>`) for this reason.
+
 ## Design — "Warm workshop" (chosen 2026-09-18)
 - Tokens in `app/globals.css` `@theme`: `paper` #f6f2ec · `stone` #e9e2d7 · `ink` #1e1b18 · `muted` #6b635a · `oak` #9a6b3f · `oak-deep` #7a5230. White on `oak` passes AA (4.6:1); small text uses `oak-deep`, never plain `oak`.
 - Fonts via `next/font/google`: **Young Serif** (`font-serif`, headings/wordmark) + **Hanken Grotesk** (`font-sans`, body). No logo — the name is a text wordmark.

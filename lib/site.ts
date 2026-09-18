@@ -1,5 +1,12 @@
 // Every TODO(samson) is waiting on Samson's answers (PLAN.md §3). Never replace one with a guessed value.
 
+// Set by next.config.ts — "/smart-interior-designs" on the GitHub Pages preview, "" everywhere else.
+// Next adds it to <Link> and imported images automatically; raw paths (e.g. <video src>) need it by hand.
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+// True only on the GitHub Pages preview, which has no server for /api/quote.
+export const isStaticPreview = process.env.NEXT_PUBLIC_STATIC_PREVIEW === "true";
+
 export const site = {
   name: "Smart Interior Design",
   owner: "Samson",

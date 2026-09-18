@@ -1,26 +1,27 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { budgets, type QuotePayload } from "@/lib/quote";
+import { isStaticPreview } from "@/lib/site";
 import WhatsAppButton from "./WhatsAppButton";
 
-type Status = "idle" | "submitting" | "success" | "error";
+type Status = "idle" | "submitting" | "success" | "error" | "preview";
 
 const field = "mt-2 w-full rounded-sm border border-ink/20 bg-white px-4 py-3 outline-none transition-colors focus:border-oak-deep";
 const label = "block text-sm font-medium";
 
-export default function QuoteForm({
-  serviceOptions,
-  defaultService,
-}: {
-  serviceOptions: { slug: string; title: string }[];
-  defaultService?: string;
-}) {
+export default function QuoteForm({ serviceOptions }: { serviceOptions: { slug: string; title: string }[] }) {
+  const defaultService = useSearchParams().get("service");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (isStaticPreview) {
+      setStatus("preview");
+      return;
+    }
     setStatus("submitting");
     setError("");
 
@@ -112,6 +113,12 @@ export default function QuoteForm({
       </label>
 
       <input name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px]" />
+
+      {status === "preview" && (
+        <p role="status" className="rounded-sm bg-white p-4 text-sm">
+          This is a preview of the site — the form goes live once hosting is set up. For now, please use WhatsApp.
+        </p>
+      )}
 
       {status === "error" && (
         <p role="alert" className="text-sm text-red-700">

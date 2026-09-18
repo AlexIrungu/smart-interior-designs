@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import QuoteForm from "@/components/QuoteForm";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { services } from "@/lib/projects";
@@ -9,10 +10,7 @@ export const metadata: Metadata = {
   description: `Request a quote for a custom kitchen, wardrobe or TV wall from ${site.name}.`,
 };
 
-export default async function QuotePage({ searchParams }: PageProps<"/quote">) {
-  const { service } = await searchParams;
-  const defaultService = services.find((s) => s.slug === service)?.slug;
-
+export default function QuotePage() {
   return (
     <section className="mx-auto grid max-w-6xl gap-12 px-4 py-12 md:grid-cols-12 md:px-6 md:py-16">
       <div className="md:col-span-5">
@@ -32,7 +30,9 @@ export default async function QuotePage({ searchParams }: PageProps<"/quote">) {
       </div>
       <div className="rounded-sm bg-stone p-6 md:col-span-7 md:p-10">
         <p className="mb-6 text-sm text-muted">Prefer a form? Fill this in and we&apos;ll call you back.</p>
-        <QuoteForm serviceOptions={services.map(({ slug, title }) => ({ slug, title }))} defaultService={defaultService} />
+        <Suspense>
+          <QuoteForm serviceOptions={services.map(({ slug, title }) => ({ slug, title }))} />
+        </Suspense>
       </div>
     </section>
   );

@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description: `${site.tagline} ${site.location}.`,
+  // The github.io preview must not get indexed and compete with the real domain later.
+  ...(process.env.GITHUB_PAGES === "true" && { robots: { index: false, follow: false } }),
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

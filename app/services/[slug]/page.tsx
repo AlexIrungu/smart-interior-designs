@@ -10,6 +10,9 @@ function findService(slug: string) {
   return services.find((s) => s.slug === slug);
 }
 
+// Only the slugs below exist — also required for the static GitHub Pages export.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }

@@ -10,6 +10,9 @@ function findProject(slug: string) {
   return projects.find((p) => p.slug === slug);
 }
 
+// Only the slugs below exist — also required for the static GitHub Pages export.
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
 }
